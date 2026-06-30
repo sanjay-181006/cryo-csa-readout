@@ -20,8 +20,8 @@ cryo-csa-readout/
 ├── README.md                     # Repository orientation and execution instructions
 ├── LICENSE                       # Open-source distribution permissions (MIT License)
 ├── schematics/
-│   ├── Schematic-CM.drawio       # Draw.io current-mirror system layout[cite: 1]
-│   └── Schematic-Ideal.drawio    # Draw.io ideal baseline system layout[cite: 1]
+│   ├── Schematic-CM.drawio       # Draw.io current-mirror system layout
+│   └── Schematic-Ideal.drawio    # Draw.io ideal baseline system layout
 └── spice/
-    ├── csa-frontend-CM.asc       # LTspice active current-mirror tail schematic[cite: 1]
-    └── csa-frontend-Ideal.asc    # LTspice idealized current source schematic[cite: 1]
+    ├── csa-frontend-CM.asc       # LTspice active current-mirror tail schematic
+    └── csa-frontend-Ideal.asc    # LTspice idealized current source schematic
