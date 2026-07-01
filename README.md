@@ -6,50 +6,73 @@
   </a>
 </p>
 
+<p align="center">
+  <a href="https://zenodo.org/record/21064438">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/7/79/Zenodo-logo.svg" width="140">
+  </a>
+</p>
+
 ---
 
 ## Abstract
 
-This repository presents an open-source simulation study of a **cryogenic CMOS charge-sensitive amplifier (CSA)** designed for semiconductor quantum-sensor readout.
+This repository presents a **cryogenic CMOS charge-sensitive amplifier (CSA)** designed for **quantum-sensor readout**, where extremely small charge signals must be converted into measurable voltages with high fidelity.
 
-A compact **five-transistor operational transconductance amplifier (OTA)** topology is evaluated under two configurations:
+A compact **five-transistor operational transconductance amplifier (OTA)** topology is investigated under two biasing regimes:
 
-* An **ideal tail current source** (baseline)
-* A **physically realizable NMOS current-mirror bias**
+* **Ideal tail current source (theoretical baseline)**
+* **NMOS current-mirror tail (physically realizable bias)**
 
-The system is characterized across extreme temperatures, from **300 K (27°C)** down to **77 K** and **5 K**, capturing the behavioral transition of CMOS analog front-ends in cryogenic regimes.
+The system is evaluated across **extreme temperature conditions (300 K → 5 K)** to study how **cryogenic device physics impacts analog front-end behavior**, with emphasis on **bias stability, signal integrity, and topology-dependent performance**.
 
-This repository provides the **complete LTspice simulation workspace and architectural schematics**.
+---
+
+## Why This Work Matters
+
+Cryogenic environments are fundamental to:
+
+* Quantum computing systems
+* Semiconductor quantum sensors
+* Cryogenic detector instrumentation
+
+However, at low temperatures:
+
+* Carrier mobility increases
+* Threshold voltages shift
+* Bias currents become unstable
+* Small-signal behavior becomes highly sensitive
+
+This creates a gap between:
+
+> **Ideal circuit assumptions** and **physically realizable implementations**
+
+This project directly explores that gap.
 
 ---
 
 ## Core Principle
 
-The CSA converts input charge into a voltage through a feedback capacitor:
+The CSA converts input charge into output voltage via a feedback capacitor:
 
-```
+```text
 V_out = Q_in / C_f
 ```
 
-For a MOS-based OTA:
+For the MOS-based OTA:
 
-```
+```text
 g_m ≈ 2 * I_D / V_ov
 ```
 
 where:
 
-* `g_m` = transconductance
-* `I_D` = drain current
-* `V_ov = V_GS - V_TH` = overdrive voltage
+* `Q_in` — input charge
+* `C_f` — feedback capacitance
+* `g_m` — transconductance
+* `I_D` — drain current
+* `V_ov = V_GS - V_TH` — overdrive voltage
 
-At cryogenic temperatures:
-
-* Carrier mobility increases
-* Threshold voltage shifts
-* Bias stability becomes non-ideal
-
-These effects directly influence gain, linearity, and transient response.
+At cryogenic temperatures, both `g_m` and `V_ov` become strongly temperature-dependent, directly influencing gain and stability.
 
 ---
 
@@ -71,22 +94,42 @@ These effects directly influence gain, linearity, and transient response.
   <em>Figure 2: CSA with NMOS current-mirror tail bias (physically realizable configuration).</em>
 </p>
 
-Both schematics implement a **five-transistor OTA-based charge-sensitive amplifier**, differing only in their tail biasing strategy.
+Both implementations use a **five-transistor OTA-based CSA topology**, differing only in the **tail bias realization**.
 
 * The **ideal configuration** isolates intrinsic amplifier behavior
-* The **current-mirror configuration** introduces realistic bias dependencies
-
-Full circuit-level details are available in the LTspice files.
+* The **current-mirror configuration** introduces real-world bias dependencies
 
 ---
 
-## What Was Explored
+## Key Insight
 
-* Cryogenic behavior of CMOS analog front-ends
-* Stability of OTA biasing at low temperatures
-* Impact of tail current realization on amplifier response
-* Differences between idealized and physically realizable biasing
-* Temperature-dependent variations in gain and transient characteristics
+> **At deep cryogenic temperatures, biasing strategy dominates circuit behavior more than topology itself.**
+
+Specifically:
+
+* Ideal biasing → stable, predictable operation
+* Physical biasing → temperature-sensitive, introduces drift and non-idealities
+
+This distinction becomes increasingly pronounced as temperature approaches **5 K**.
+
+---
+
+## Results (High-Level)
+
+* The CSA maintains correct charge-to-voltage conversion behavior
+* Gain remains governed by feedback capacitance:
+
+```text
+Gain ∝ 1 / C_f
+```
+
+* Cryogenic operation introduces:
+
+  * Bias current variation
+  * Operating point shifts
+  * Reduced predictability in current-mirror configurations
+
+* Performance divergence between ideal and physical biasing increases with decreasing temperature
 
 ---
 
@@ -106,26 +149,31 @@ cryo-csa-readout/
 
 ---
 
-## Usage
+## Reproducibility
 
-Open the LTspice schematics:
+All results are reproducible using the provided LTspice files.
 
-* `csa-frontend-Ideal.asc`
-* `csa-frontend-CM.asc`
+To explore the system:
 
-Run simulations using `.op`, `.tran`, and temperature sweeps:
+1. Open the `.asc` schematics in LTspice
+2. Run operating point (`.op`) and transient (`.tran`) simulations
+3. Sweep temperature:
 
-```
+```text
 .temp 300 77 5
 ```
 
-Modify input charge, bias conditions, and feedback parameters to explore system behavior.
+4. Compare:
+
+   * Output response
+   * Bias stability
+   * Ideal vs current-mirror behavior
 
 ---
 
 ## Citation
 
-If you use this work in research, please cite:
+If you use this work, please cite:
 
 > Selvakumar, S. (2026). *Cryo-CMOS Charge-Sensitive Amplifier for Quantum-Sensor Readout*. Zenodo. https://doi.org/10.5281/zenodo.21064438
 
@@ -133,20 +181,33 @@ If you use this work in research, please cite:
 
 ## License
 
-This project is released under the **MIT License**.
+Released under the **MIT License**.
 
 ---
 
 ## Notes
 
-This repository is intentionally minimal in explanation.
+This repository is intentionally structured to:
 
-The focus is on:
+* Present **clear system-level understanding**
+* Provide **fully reproducible simulation artifacts**
+* Avoid over-specification in documentation
 
-* Clean architecture
-* Reproducible simulation
-* Direct access to circuit-level behavior
+Detailed behavior, parameter choices, and circuit nuances are best understood directly through the **LTspice schematics and simulations**.
 
-Users are encouraged to explore the LTspice files for full insight into the system.
+---
+
+## Author
+
+**Sanjay Selvakumar**
+Independent Project
+
+---
+
+## Conclusion
+
+This work demonstrates that while CSA architectures remain effective in cryogenic regimes, **practical biasing mechanisms introduce non-trivial limitations** that are not captured in ideal models.
+
+The project serves as a **minimal, high-signal exploration of cryogenic analog circuit behavior**, bridging theoretical assumptions and physically realizable design.
 
 ---
