@@ -1,13 +1,13 @@
 # Cryo-CMOS Charge-Sensitive Amplifier for Quantum-Sensor Readout
 
 <p align="center">
-  <a href="https://doi.org/10.5281/zenodo.21064438">
-    <img src="https://zenodo.org/badge/DOI/10.5281/zenodo.21064438.svg" alt="DOI">
+  <a href="https://doi.org/10.5281/zenodo.21134662">
+    <img src="https://zenodo.org/badge/DOI/10.5281/zenodo.21134662.svg" alt="DOI">
   </a>
 </p>
 
 <p align="center">
-  <a href="https://zenodo.org/record/21064438">
+  <a href="https://zenodo.org/record/21134662">
     <img src="https://upload.wikimedia.org/wikipedia/commons/7/79/Zenodo-logo.svg" width="140">
   </a>
 </p>
