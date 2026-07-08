@@ -1,8 +1,8 @@
 # Cryogenic-CMOS Charge-Sensitive Amplifier (CSA)
 
 <p align="center">
-  <a href="https://doi.org/10.5281/zenodo.21157728">
-    <img src="https://zenodo.org/badge/DOI/10.5281/zenodo.21157728.svg" alt="DOI">
+  <a href="https://doi.org/10.5281/zenodo.21256347">
+    <img src="https://zenodo.org/badge/DOI/10.5281/zenodo.21256347.svg" alt="DOI">
   </a>
 </p>
 
